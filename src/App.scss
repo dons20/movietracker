@@ -1,0 +1,6 @@
+.App {
+    height: calc(100% - 20px);
+    display: grid;
+    grid-template-rows: minmax(100px, auto) 1fr minmax(100px, auto);
+    padding: 10px;
+}
