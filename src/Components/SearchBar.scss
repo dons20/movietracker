@@ -1,7 +1,7 @@
 $background-color: hsl(222, 13%, 25%);
 $search-bg-color: hsl(210, 5%, 22%);
 $icon-color: #00fede;
-$transition: all 0.5s ease;
+$transition: all 0.5s ease-in-out;
 
 .searchbar {
     background-color: $search-bg-color;
@@ -55,19 +55,26 @@ $transition: all 0.5s ease;
 }
 
 .searchButton {
-    height: 60px;
-    display: block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    margin: auto 20px;
     position: absolute;
     right: 0;
     top: 0;
-    margin: 10px 20px;
-    cursor: pointer;
+    bottom: 10px;
+    transition: $transition;
+
+    .open & {
+        bottom: 0;
+    }
 }
 
 .searchIcon {
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     border: 3px solid $icon-color;
     display: block;
     position: relative;
@@ -99,19 +106,19 @@ $transition: all 0.5s ease;
     }
     .open & {
         margin: 0;
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         border-radius: 60px;
         &:before {
             transform: rotate(52deg);
-            right: 22px;
-            top: 25px;
+            right: 20px;
+            top: 20px;
             height: 18px;
         }
         &:after {
             transform: rotate(-230deg);
-            right: 22px;
-            top: 15px;
+            right: 20px;
+            top: 10px;
             height: 18px;
         }
     }

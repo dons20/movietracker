@@ -3,7 +3,7 @@ import React from "react";
 function Content() {
     return (
         <main role="main">
-            <input type="search" name="" id="" />
+            <div>abc</div>
         </main>
     );
 }

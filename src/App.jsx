@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import Header from "./Components/Header";
 import Content from "./Components/Content";
 import Footer from "./Components/Footer";
 
 function App() {
+    const [userData, setUserData] = useState({ moviesWatched: [] });
     return (
         <div className="App">
-            <Header />
-            <Content />
+            <Header setData={setUserData} />
+            <Content data={userData} />
             <Footer />
         </div>
     );
