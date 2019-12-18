@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Content() {
-    return <main></main>;
+    return (
+        <main role="main">
+            <input type="search" name="" id="" />
+        </main>
+    );
 }
 
 export default Content;

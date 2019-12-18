@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import "./Footer.scss";
 
 function Footer() {
-    return <footer>Copyright &copy; 2019 Keno Clayton</footer>;
+    return <footer className="footer">Copyright &copy; {new Date().getFullYear()} Keno Clayton</footer>;
 }
 
 export default Footer;
