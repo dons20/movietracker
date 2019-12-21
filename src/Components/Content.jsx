@@ -1,17 +1,20 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import SearchPage from "./SearchPage";
 import "./Content.scss";
 
 function Content({ data }) {
     return (
-        <main role="main">
-            <section>
-                <h1>Featured Movies</h1>
-                <div>{data.featured}</div>
-            </section>
-            <section>
-                <h1>Your Watchlist</h1>
-                <div>{data.moviesWatched}</div>
-            </section>
+        <main role="main" className="content">
+            <Switch>
+                <Route path="/" exact>
+                    <HomePage data={data} />
+                </Route>
+                <Route path="/search" exact>
+                    <SearchPage data={data} />
+                </Route>
+            </Switch>
         </main>
     );
 }

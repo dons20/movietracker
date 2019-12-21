@@ -1,7 +1,9 @@
 import React from "react";
 import "./MovieCard.scss";
 
-function MovieCard({ image, title, rating, summary, year }) {
+function MovieCard({ image, title, rating, summary, date }) {
+    const year = parseInt(date.substring(0, 3));
+
     return (
         <div className="movieCard">
             <div className="splash">

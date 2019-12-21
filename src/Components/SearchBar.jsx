@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "./useDebounce";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./SearchBar.scss";
 
 function SearchBar({ setData }) {
     const API_PATH = "/api/search/";
+    const MAX_SUGGESTIONS = 5;
 
     /**
      * State Variables
      */
+    const [page] = useState(1);
     const [isOpen, setOpen] = useState(false);
+    const [focused, setFocused] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [searchType, setSearchType] = useState("title");
     const [suggestions, setSuggestions] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
 
@@ -21,15 +24,15 @@ function SearchBar({ setData }) {
      * Handles the submission of the search box
      * @param {HTMLElement} e Input that was triggered
      */
-    const handleSearchSubmit = e => {
+    const handleSearchSubmit = async e => {
         e.preventDefault();
-        setSearchType("title");
         axios({
             method: "post",
             url: API_PATH,
             data: {
+                page: 1,
                 query: searchQuery,
-                type: searchType
+                type: "title"
             }
         })
             .then(result => {
@@ -51,13 +54,13 @@ function SearchBar({ setData }) {
     useEffect(() => {
         //Defined function within effect to work with effect dependencies (search)
         const searchCharacters = search => {
-            setSearchType("keyword");
             return axios({
                 method: "post",
                 url: API_PATH,
                 data: {
+                    page: page,
                     query: search,
-                    type: searchType
+                    type: "keyword"
                 }
             })
                 .then(result => result.data)
@@ -72,36 +75,60 @@ function SearchBar({ setData }) {
             setIsSearching(true);
             searchCharacters(debouncedSearchTerm).then(data => {
                 setIsSearching(false);
-                if (data) setSuggestions(data.results.map(r => r.name)); //setSuggestions(data.results);
+                if (Object.entries(data).length > 0) setSuggestions(data.results.map(r => r.name)); //setSuggestions(data.results);
             });
         } else {
             setSuggestions([]);
         }
-    }, [debouncedSearchTerm, searchType]);
+    }, [debouncedSearchTerm, page]);
 
     return (
         <div className={`searchbar ${isOpen ? "open" : ""}`}>
             <span className="searchButton" onClick={() => setOpen(!isOpen)}>
                 <span className="searchIcon"></span>
             </span>
-            <form action="/api/search" method="post" onSubmit={handleSearchSubmit}>
-                <input
-                    type="search"
-                    id="searchbox"
-                    name="searchbox"
-                    className="searchbox"
-                    value={searchQuery}
-                    onChange={e => {
-                        setSearchQuery(e.target.value);
-                    }}
-                    placeholder="Search movies..."
-                    autoComplete="off"
-                    aria-label="Search movie database"
-                    required
-                />
-            </form>
-            {isSearching && <div>Searching ...</div>}
-            {suggestions && <ul className="suggestions">{suggestions}</ul>}
+            {isOpen && (
+                <form action="/api/search" method="post" onSubmit={handleSearchSubmit}>
+                    <input
+                        type="search"
+                        id="searchbox"
+                        name="searchbox"
+                        className="searchbox"
+                        value={searchQuery}
+                        onFocus={() => setFocused(true)}
+                        onChange={e => {
+                            setSearchQuery(e.target.value);
+                        }}
+                        placeholder="Search movies..."
+                        autoComplete="off"
+                        aria-label="Search movie database"
+                        onBlur={() => {
+                            setTimeout(() => setFocused(false), 100);
+                        }}
+                        required
+                    />
+                </form>
+            )}
+
+            {suggestions && focused && (
+                <ul className="suggestions">
+                    {suggestions.length === 0 && searchQuery && !isSearching && (
+                        <div className="suggestedItem">No results found...</div>
+                    )}
+                    {isSearching && <div className="suggestedItem">Searching ...</div>}
+                    {suggestions[0] &&
+                        suggestions.map((s, i) =>
+                            i < MAX_SUGGESTIONS ? (
+                                <div key={i} className="suggestedItem" onClick={() => setSearchQuery(s)}>
+                                    {s}
+                                </div>
+                            ) : null
+                        )}
+                    <Link className="advancedItem" to="/search">
+                        Advanced Search...
+                    </Link>
+                </ul>
+            )}
         </div>
     );
 }
