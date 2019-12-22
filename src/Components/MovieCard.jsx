@@ -1,8 +1,8 @@
 import React from "react";
 import "./MovieCard.scss";
 
-function MovieCard({ image, title, rating, summary, date }) {
-    const year = parseInt(date.substring(0, 3));
+function MovieCard({ image, title, rating, date }) {
+    const year = parseInt(date.substring(0, 4));
 
     return (
         <div className="movieCard">
@@ -10,8 +10,7 @@ function MovieCard({ image, title, rating, summary, date }) {
                 <img src={image} alt={`Cover art for ${title}`} />
             </div>
             <div>
-                <div className="title"></div>
-                <div className="summary">{summary}</div>
+                <div className="title">{title}</div>
             </div>
             <div>
                 <div className="rating">{rating} / 10</div>

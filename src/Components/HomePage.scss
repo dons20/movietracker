@@ -1,0 +1,9 @@
+.featuredContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-auto-columns: 300px;
+    grid-auto-rows: 1fr;
+    justify-content: space-evenly;
+    column-gap: 10px;
+    row-gap: 20px;
+}

@@ -6,7 +6,7 @@ import "./Content.scss";
 const HomePage = React.lazy(() => import("./HomePage"));
 const SearchPage = React.lazy(() => import("./SearchPage"));
 
-function Content({ data }) {
+function Content(props) {
     return (
         <Suspense
             fallback={
@@ -18,10 +18,10 @@ function Content({ data }) {
             <main role="main" className="content">
                 <Switch>
                     <Route path="/" exact>
-                        <HomePage data={data} />
+                        <HomePage {...props} />
                     </Route>
                     <Route path="/search" exact>
-                        <SearchPage data={data} />
+                        <SearchPage {...props} />
                     </Route>
                 </Switch>
             </main>
