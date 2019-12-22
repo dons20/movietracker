@@ -1,6 +1,8 @@
+@import "../Utils/utils.scss";
+
 .header {
-    background-color: rgba(0, 89, 161, 0.8);
-    color: #fff;
+    background-color: $primary-color;
+    color: $overlay-font-color;
     align-items: center;
     display: grid;
     grid-template-columns: minmax(100px, 600px) minmax(100px, 800px);

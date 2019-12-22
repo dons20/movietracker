@@ -1,0 +1,99 @@
+@import "../Utils/utils.scss";
+
+@keyframes slideDown {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.filters {
+    background-color: rgb(40, 120, 189);
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 8px rgba(0, 0, 0, 0.24);
+    color: #fff;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+    position: absolute;
+    width: 90%;
+    z-index: 1000;
+    & label {
+        align-items: center;
+        display: grid;
+        font-size: 1.1em;
+        font-weight: bold;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        & > select {
+            font-size: 0.9em;
+            padding: 5px;
+        }
+    }
+}
+
+.header {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr 120px;
+    justify-items: center;
+}
+
+.showFilters {
+    cursor: pointer;
+    text-decoration: underline;
+    justify-self: right;
+}
+
+.show {
+    animation: slideDown 0.3s ease-out 1 forwards;
+    transform-origin: top;
+    will-change: transform;
+}
+
+.search {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 100%;
+    & > input {
+        padding: 10px;
+        margin: 10px 0;
+        border: 3px solid $accent-color;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9dbfaf;
+    }
+    & > button {
+        width: 40px;
+        margin: 10px 0;
+        border: 1px solid $accent-color;
+        background: $accent-color;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+    }
+}
+
+.searchBtn {
+    cursor: pointer;
+    background-color: rgba(0, 115, 209, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 6px rgba(0, 0, 0, 0.24);
+    display: inline-block;
+    font-weight: bold;
+    padding: 10px;
+    pointer-events: none;
+    margin: 10px 0;
+    transition: background-color 0.1s ease-out;
+    will-change: transition;
+    &:hover {
+        background-color: hsla(207, 100%, 40%, 0.7);
+    }
+}

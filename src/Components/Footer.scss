@@ -1,7 +1,9 @@
+@import "../Utils/utils.scss";
+
 .footer {
     align-items: center;
-    background-color: rgb(0, 65, 117);
-    color: white;
+    background-color: $footer-color;
+    color: $overlay-font-color;
     display: grid;
     grid-template-rows: 1fr 1fr;
     row-gap: 10px;

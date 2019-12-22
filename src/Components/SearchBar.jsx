@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useDebounce from "./useDebounce";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./SearchBar.scss";
+import styles from "./SearchBar.module.scss";
 
 function SearchBar({ setData }) {
     const API_PATH = "/api/search/";
@@ -83,9 +83,9 @@ function SearchBar({ setData }) {
     }, [debouncedSearchTerm, page]);
 
     return (
-        <div className={`searchbar ${isOpen ? "open" : ""}`}>
-            <span className="searchButton" onClick={() => setOpen(!isOpen)}>
-                <span className="searchIcon"></span>
+        <div className={`${styles.searchbar} ${isOpen ? styles.open : ""}`}>
+            <span className={styles.searchButton} onClick={() => setOpen(!isOpen)}>
+                <span className={styles.searchIcon}></span>
             </span>
             {isOpen && (
                 <form action="/api/search" method="post" onSubmit={handleSearchSubmit}>
@@ -93,7 +93,7 @@ function SearchBar({ setData }) {
                         type="search"
                         id="searchbox"
                         name="searchbox"
-                        className="searchbox"
+                        className={`${styles.searchbox}`}
                         value={searchQuery}
                         onFocus={() => setFocused(true)}
                         onChange={e => {
@@ -111,20 +111,20 @@ function SearchBar({ setData }) {
             )}
 
             {suggestions && focused && (
-                <ul className="suggestions">
+                <ul className={styles.suggestions}>
                     {suggestions.length === 0 && searchQuery && !isSearching && (
-                        <div className="suggestedItem">No results found...</div>
+                        <div className={styles.suggestedItem}>No results found...</div>
                     )}
-                    {isSearching && <div className="suggestedItem">Searching ...</div>}
+                    {isSearching && <div className={styles.suggestedItem}>Searching ...</div>}
                     {suggestions[0] &&
                         suggestions.map((s, i) =>
                             i < MAX_SUGGESTIONS ? (
-                                <div key={i} className="suggestedItem" onClick={() => setSearchQuery(s)}>
+                                <div key={i} className={styles.suggestedItem} onClick={() => setSearchQuery(s)}>
                                     {s}
                                 </div>
                             ) : null
                         )}
-                    <Link className="advancedItem" to="/search">
+                    <Link className={styles.advancedItem} to="/search">
                         Advanced Search...
                     </Link>
                 </ul>

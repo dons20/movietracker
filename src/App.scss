@@ -3,3 +3,10 @@
     display: grid;
     grid-template-rows: 100px 1fr minmax(60px, 80px);
 }
+
+.pulseContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
