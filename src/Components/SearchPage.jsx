@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
 import styles from "./SearchPage.module.scss";
+import placeholder from "../placeholder_poster.png";
 import axios from "axios";
 
-function SearchPage({ data, config, errorDisplay }) {
+function SearchPage({ config, data, errorDisplay }) {
     const [showFilters, setShowFilters] = useState(false);
     const [searchType, setSearchType] = useState("Title");
     const [searchQuery, setSearchQuery] = useState("");
     const [searchData, setSearchData] = useState({});
 
-    const path = config.images ? `${config.images.base_url}w300/` : null;
+    const path = config.images ? `${config.images.base_url}w300/` : false;
 
     const handleSearchSubmit = e => {
         e.preventDefault();
@@ -41,8 +42,11 @@ function SearchPage({ data, config, errorDisplay }) {
                     });
                 });
         } else if (searchType === "Actor") {
+            //TBD - Requires listing dropdown of search matches, and allowing user to choose from actors to then search
         } else if (searchType === "Publisher") {
+            //TBD - Requires listing dropdown of search matches, and allowing user to choose from publishers to then search
         } else if (searchType === "Genre") {
+            //TBD - Requires listing dropdown of search matches, and allowing user to choose from genres to then search
         }
     };
 
@@ -61,9 +65,15 @@ function SearchPage({ data, config, errorDisplay }) {
                         <span>Search By:</span>
                         <select defaultChecked={1} onChange={e => setSearchType(e.target.value)} value={searchType}>
                             <option value="Title">Movie Title</option>
-                            <option value="Actor">Actor</option>
-                            <option value="Publisher">Publisher/Director</option>
-                            <option value="Genre">Genre</option>
+                            <option value="Actor" disabled>
+                                Actor
+                            </option>
+                            <option value="Publisher" disabled>
+                                Publisher/Director
+                            </option>
+                            <option value="Genre" disabled>
+                                Genre
+                            </option>
                         </select>
                     </label>
                 </form>
@@ -91,7 +101,7 @@ function SearchPage({ data, config, errorDisplay }) {
                     <div className={styles.searchResults}>
                         {searchData.map(m => (
                             <MovieCard
-                                image={`${path}${m.poster_path}`}
+                                image={m.poster_path && path ? `${path}${m.poster_path}` : placeholder}
                                 title={m.title}
                                 rating={m.vote_average}
                                 summary={m.overview}
