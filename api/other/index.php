@@ -2,6 +2,10 @@
 
 require_once '../../../secure/api_key.php';
 
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    exit("This page can only be accessed through a POST request");
+}
+
 $client_data = file_get_contents("php://input");
 $_POST = json_decode($client_data, true);
 
