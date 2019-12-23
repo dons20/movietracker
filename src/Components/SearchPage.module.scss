@@ -62,17 +62,17 @@
     & > input {
         padding: 10px;
         margin: 10px 0;
-        border: 3px solid $accent-color;
+        border: 3px solid $primary-color;
         border-right: none;
         border-radius: 5px 0 0 5px;
         outline: none;
-        color: #9dbfaf;
+        color: #0075a3;
     }
     & > button {
         width: 40px;
         margin: 10px 0;
-        border: 1px solid $accent-color;
-        background: $accent-color;
+        border: 1px solid $primary-color;
+        background: $primary-color;
         text-align: center;
         color: #fff;
         border-radius: 0 5px 5px 0;

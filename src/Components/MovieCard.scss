@@ -4,8 +4,27 @@
     display: grid;
     grid-template-rows: 1fr auto auto;
     width: 300px;
-    transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     &:hover {
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        transform: translateY(-2px);
     }
+}
+
+.movieTitle {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.movieEtc {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.movieYear {
+    color: #333;
+    font-weight: bolder;
 }

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import MovieCard from "./MovieCard";
 import "./HomePage.scss";
 
-function HomePage({ config, data }) {
-    const [featured, setFeatured] = useState();
+const MovieCard = React.lazy(() => import("./MovieCard"));
 
-    const path = `${config.images.base_url}w300/`;
+function HomePage({ config, data }) {
+    const [featured, setFeatured] = useState({});
+
+    const path = config.images ? `${config.images.base_url}w300/` : null;
 
     useEffect(() => {
         async function getResult() {
@@ -25,23 +27,37 @@ function HomePage({ config, data }) {
             <section>
                 <h1>Featured Movies</h1>
                 <div className="featuredContainer">
-                    {featured &&
-                        featured.length > 0 &&
-                        featured.map(x => (
-                            <MovieCard
-                                image={`${path}${x.poster_path}`}
-                                title={x.original_title}
-                                rating={x.vote_average}
-                                date={x.release_date}
-                                key={x.id}
-                            />
-                        ))}
+                    <Suspense
+                        fallback={
+                            <div className="pulseContainer">
+                                <PulseLoader size={20} margin={5} color="#337ab4" loading={true} />
+                            </div>
+                        }
+                    >
+                        {featured &&
+                            featured.length > 0 &&
+                            featured.map(x => (
+                                <MovieCard
+                                    image={`${path}${x.poster_path}`}
+                                    title={x.original_title}
+                                    rating={x.vote_average}
+                                    date={x.release_date}
+                                    id={x.id}
+                                    key={x.id}
+                                />
+                            ))}
+                    </Suspense>
                 </div>
             </section>
             <section>
                 <h1>Your Watchlist</h1>
-                <div>{data.moviesWatched}</div>
+                <div>
+                    {data.moviesWatched
+                        ? data.moviesWatched
+                        : "Whoops! It looks like you don't have any movies on your watchlist yet..."}
+                </div>
             </section>
+            <br />
             <Link to="/search">Advanced Search ➡</Link>
         </>
     );

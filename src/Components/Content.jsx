@@ -5,6 +5,7 @@ import "./Content.scss";
 
 const HomePage = React.lazy(() => import("./HomePage"));
 const SearchPage = React.lazy(() => import("./SearchPage"));
+const MoviePage = React.lazy(() => import("./MoviePage"));
 
 function Content(props) {
     return (
@@ -20,8 +21,11 @@ function Content(props) {
                     <Route path="/" exact>
                         <HomePage {...props} />
                     </Route>
-                    <Route path="/search" exact>
+                    <Route path="/search">
                         <SearchPage {...props} />
+                    </Route>
+                    <Route path="/movie/:id">
+                        <MoviePage {...props} />
                     </Route>
                 </Switch>
             </main>
