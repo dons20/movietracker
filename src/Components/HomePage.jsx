@@ -51,10 +51,22 @@ function HomePage({ config, data }) {
             </section>
             <section>
                 <h1>Your Watchlist</h1>
-                <div>
-                    {data.moviesWatched
-                        ? data.moviesWatched
-                        : "Whoops! It looks like you don't have any movies on your watchlist yet..."}
+                <div className="watchedContainer">
+                    {data &&
+                        data.length > 0 &&
+                        data.map(m => (
+                            <MovieCard
+                                image={`${path}${m.Image}`}
+                                title={m.Title}
+                                rating={m.Rating}
+                                date={m.Date}
+                                id={m.ID}
+                                key={m.ID}
+                            />
+                        ))}
+                    {(!data || data.length === 0) && (
+                        <span>"Whoops! It looks like you don't have any movies on your watchlist yet..."</span>
+                    )}
                 </div>
             </section>
             <br />

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import useDebounce from "./useDebounce";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./SearchBar.module.scss";
+import axios from "axios";
 
 function SearchBar({ setData }) {
     const API_PATH = "/api/search/";

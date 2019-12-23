@@ -7,7 +7,7 @@ import styles from "./MoviePage.module.scss";
 function MoviePage({ data, errorDisplay }) {
     const { id } = useParams();
     const [movieData, setMovieData] = useState({});
-    const [rating, setRating] = useState(4);
+    const [rating, setRating] = useState(0);
 
     useEffect(() => {
         axios({
@@ -49,6 +49,20 @@ function MoviePage({ data, errorDisplay }) {
                     date: movieData.release_date,
                     image: movieData.poster_path
                 }
+            }).catch(e => {
+                errorDisplay.addNotification({
+                    title: "An error has occured!",
+                    message: e.toString(),
+                    type: "danger",
+                    insert: "bottom",
+                    container: "bottom-center",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                        duration: 3000,
+                        onScreen: true
+                    }
+                });
             });
         }
     };

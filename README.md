@@ -17,6 +17,7 @@ I am a movie lover and I would like to be able to keep track of a movie I have w
 
 ### Steps
 -	Open a terminal/command prompt inside the `Code` folder
+-   Use the command `npm i` to install all required dependencies
 -	Use the command `npm run build` to generate a build folder
 -	Use the command `npm run start` to start testing the app locally
 

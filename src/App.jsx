@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import "./App.scss";
-import axios from "axios";
 import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import axios from "axios";
+import "./App.scss";
 
 const Header = React.lazy(() => import("./Components/Header"));
 const Content = React.lazy(() => import("./Components/Content"));
@@ -28,6 +28,17 @@ function App() {
             }
         });
     }
+
+    useEffect(() => {
+        axios({
+            method: "post",
+            url: "/api/retrieve/"
+        }).then(r => {
+            if (r.data && r.data.length > 0) {
+                setUserData(r.data);
+            }
+        });
+    }, []);
 
     useEffect(() => {
         async function checkAPIVars() {

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./MovieCard.scss";
 
 function MovieCard({ id, image, title, rating, date }) {
-    const year = parseInt(date.substring(0, 4));
+    const year = date ? parseInt(date.substring(0, 4)) : "unknown";
     const history = useHistory();
 
     return (
