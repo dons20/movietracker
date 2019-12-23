@@ -6,11 +6,11 @@ $client_data = file_get_contents("php://input");
 $_POST = json_decode($client_data, true);
 
 // Handle empty search variables
-if (empty($_POST['query']) && empty($_POST['type'])) {
+if (empty($_POST['type'])) {
     // response code - 400 Bad Request
 
     http_response_code(400);
-    exit("No query provided");
+    exit("No type specified");
 }
 
 if ($_POST) {
@@ -18,29 +18,19 @@ if ($_POST) {
     // set response code - 200 OK
     http_response_code(200);
 
+    $type = $_POST['type'];
+
     // Check type of search
-    if ($_POST['type'] === "title") {
-        $page = $_POST['page'];
-        $query = $_POST['query'];
-
-        $URL = "https://api.themoviedb.org/3/search/movie?api_key={$api_key}&language=en-US&query={$query}&page={$page}&include_adult=false";
+    if ($_POST['type'] === "config") {
+        $URL = "https://api.themoviedb.org/3/configuration?api_key={$api_key}";
         $curl_response = curlGET($URL);
         echo $curl_response;
-    } else if ($_POST['type'] === "keyword") {
-        $page = $_POST['page'];
-        $query = $_POST['query'];
-
-        $URL = "https://api.themoviedb.org/3/search/keyword?api_key={$api_key}&query={$query}&page={$page}";
-        $curl_response = curlGET($URL);
-        echo $curl_response;
-    } else if ($_POST['type'] === "movie") {
-        $movie_id = $_POST['movie_id'];
-
-        $URL = "https://api.themoviedb.org/3/movie/{$movie_id}?api_key={$api_key}&language=en-US";
+    } else if ($_POST['type'] == "genres") {
+        $URL = "https://api.themoviedb.org/3/genre/movie/list?api_key={$api_key}&language=en-US";
         $curl_response = curlGET($URL);
         echo $curl_response;
     } else {
-        exit("Unsupported type specified");
+        exit("Unsupported Type Specified");
     }
 }
 
