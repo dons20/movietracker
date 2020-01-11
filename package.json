@@ -27,7 +27,7 @@
     "eslintConfig": {
         "extends": "react-app"
     },
-    "homepage": "http://localhost/movietracker/build",
+    "homepage": "http://localhost/movietracker/",
     "browserslist": {
         "production": [
             ">0.2%",

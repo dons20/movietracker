@@ -2,6 +2,10 @@
 
 require_once '../../../secure/api_key.php';
 
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    exit("This page can only be accessed through a POST request");
+}
+
 // set response code - 200 OK
 http_response_code(200);
 
