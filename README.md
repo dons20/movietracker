@@ -15,6 +15,8 @@ I am a movie lover and I would like to be able to keep track of a movie I have w
 
 ## Instructions
 
+This project is not intended to be a boilerplate for spinoff projects, but should you need to, here are some useful instructions to get everything working like my setup. 
+
 ### Compile Instructions
 -	Open a terminal/command prompt inside the `Code` folder
 -   Use the command `npm i` to install all required dependencies
@@ -23,6 +25,14 @@ I am a movie lover and I would like to be able to keep track of a movie I have w
     - View [FTP-Deploy](https://github.com/simonh1000/ftp-deploy) for more information
 -	Use the command `npm run start` to start testing the app locally
     - Create an empty file called `devserver` in the root `movietracker` folder for local testing
+    - Create a folder called `secure` and place it wherever you'd like (ideally outside of the website root to prevent unauthorized access);
+      - Create `api_key.php` in that folder and put the following inside:
+        ```php
+        <?php
+        $api_key = 'YOUR_API_KEY_HERE';    
+        ```
+      - You can get your own API key from [TheMovieDB.org](https://www.themoviedb.org/faq/api) once you register
+      - Ensure that `app_root.php` points to the directory that contains the `secure` folder.
 
 ### Hosting Instructions
 
@@ -37,6 +47,7 @@ I am a movie lover and I would like to be able to keep track of a movie I have w
 - Folder Structure should look similar to this:
 
 ```
+📁 secure
 📁 MyWebsite
 ┣ 📁api 
 ┣ 📂config
