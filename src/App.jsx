@@ -6,6 +6,7 @@ import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import axios from "axios";
 import "./App.scss";
+import "animate.css";
 
 const Header = React.lazy(() => import("./Components/Header"));
 const Content = React.lazy(() => import("./Components/Content"));
@@ -22,7 +23,7 @@ function App() {
     async function getOtherAPI(type) {
         return await axios({
             method: "post",
-            url: "/api/other/",
+            url: "api/other/",
             data: {
                 type: type
             }
@@ -32,12 +33,35 @@ function App() {
     useEffect(() => {
         axios({
             method: "post",
-            url: "/api/retrieve/"
-        }).then(r => {
-            if (r.data && r.data.length > 0) {
-                setUserData(r.data);
-            }
-        });
+            url: "api/retrieve/"
+        })
+            .then(r => {
+                if (r.data && typeof r.data === "object" && r.data.length > 0) {
+                    setUserData(r.data);
+                }
+            })
+            .catch(e => {
+                if (e.response) console.error(`${e.response.data.error.message}`);
+                store.addNotification({
+                    title: "An error has occured!",
+                    message:
+                        "Refresh the page to try again or try again later. Details have been logged to the console.",
+                    type: "danger",
+                    insert: "bottom",
+                    width: 300,
+                    container: "bottom-center",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    dismiss: {
+                        duration: 3000,
+                        onScreen: true,
+                        pauseOnHover: true
+                    },
+                    slidingExit: {
+                        timingFunction: "ease-in-out"
+                    }
+                });
+            });
     }, []);
 
     useEffect(() => {
@@ -87,7 +111,7 @@ function App() {
     }, [API_CONFIG, API_GENRES, errorMessage, maxFails, errorDisplayed]);
 
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <ReactNotification />
             <Suspense
                 fallback={

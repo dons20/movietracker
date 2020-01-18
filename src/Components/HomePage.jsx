@@ -9,13 +9,13 @@ const MovieCard = React.lazy(() => import("./MovieCard"));
 function HomePage({ config, data }) {
     const [featured, setFeatured] = useState({});
 
-    const path = config.images ? `${config.images.base_url}w300/` : null;
+    const path = config.images ? `${config.images.secure_base_url}w300/` : null;
 
     useEffect(() => {
         async function getResult() {
             const result = await axios({
                 method: "post",
-                url: "/api/discover/"
+                url: "api/discover/"
             }).then(r => r.data.results);
             setFeatured(result);
         }
@@ -70,7 +70,7 @@ function HomePage({ config, data }) {
                 </div>
             </section>
             <br />
-            <Link to="/search">Advanced Search ➡</Link>
+            <Link to="search">Advanced Search ➡</Link>
         </>
     );
 }

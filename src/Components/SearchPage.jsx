@@ -11,14 +11,14 @@ function SearchPage({ config, data, errorDisplay }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchData, setSearchData] = useState({});
 
-    const path = config.images ? `${config.images.base_url}w300/` : false;
+    const path = config.images ? `${config.images.secure_base_url}w300/` : false;
 
     const handleSearchSubmit = e => {
         e.preventDefault();
         if (searchType === "Title") {
             axios({
                 method: "post",
-                url: "/api/search/",
+                url: "api/search/",
                 data: {
                     query: searchQuery,
                     type: "title",
@@ -53,7 +53,7 @@ function SearchPage({ config, data, errorDisplay }) {
     return (
         <>
             <header className={styles.header}>
-                <Link to="/">⬅ Back</Link>
+                <Link to="">⬅ Back</Link>
                 <h2 className="title">Search</h2>
                 <div className={styles.showFilters} onClick={() => setShowFilters(!showFilters)}>
                     {showFilters ? "Close" : "Advanced Filters"}

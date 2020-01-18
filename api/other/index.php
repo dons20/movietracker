@@ -1,9 +1,27 @@
 <?php
 
-require_once '../../../secure/api_key.php';
+define('_DEFVAR', 1);
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit("This page can only be accessed through a POST request");
+}
+
+require_once '../app_root.php';
+
+try {
+    if (!file_exists("{$root}/secure/api_key.php")) {
+        throw new Exception('Unable to access API');
+    } else {
+        require_once "{$root}/secure/api_key.php";
+    }
+} catch (Exception $e) {
+    http_response_code(404);
+    echo json_encode(array(
+        'error' => array(
+            'message' => $e->getMessage()
+        ),
+    ));
+    exit();
 }
 
 $client_data = file_get_contents("php://input");

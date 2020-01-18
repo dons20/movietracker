@@ -1,6 +1,20 @@
 <?php
 
-require_once '../../config/index.php';
+try {
+    if (!file_exists('../../config/index.php')) {
+        throw new Exception('Unable to retrieve database config');
+    } else {
+        require_once '../../config/index.php';
+    }
+} catch (Exception $e) {
+    http_response_code(404);
+    echo json_encode(array(
+        'error' => array(
+            'message' => $e->getMessage()
+        ),
+    ));
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit("This page can only be accessed through a POST request");

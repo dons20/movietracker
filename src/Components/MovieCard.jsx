@@ -7,7 +7,7 @@ function MovieCard({ id, image, title, rating, date }) {
     const history = useHistory();
 
     return (
-        <div className="movieCard" onClick={() => history.push(`/movie/${id}`)}>
+        <div className="movieCard" onClick={() => history.push(`movie/${id}`)}>
             <div className="splash">
                 <img src={image} alt={`Cover art for ${title}`} />
             </div>

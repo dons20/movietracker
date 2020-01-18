@@ -24,4 +24,9 @@ yarn-error.log*
 /.vscode
 
 #php server config
-/config
+/config/index.php
+
+#Local environment file
+devserver
+ftp.js
+/public/.htaccess

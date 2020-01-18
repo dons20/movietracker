@@ -8,7 +8,7 @@ function Header() {
 
     return (
         <header className="header">
-            <h2 className="headerTitle" onClick={() => history.push("/")}>
+            <h2 className="headerTitle" onClick={() => history.push("")}>
                 Movie Lovers Watchlist
             </h2>
             <SearchBar />
