@@ -4,6 +4,17 @@
 
 I am a movie lover and I would like to be able to keep track of a movie I have watched or seen already. I should be able to search for movies by who appeared in the movie, who made or published the movie, and of course by genres to which the movies belong to. I would like to keep track of how others have rated the movie such IMDb, Rotten Tomatoes and I must be able to personally rate the movie only once. I would like to keep a record of all the movies I have watched so that it can be saved as a personal collection to keep up with other movie lovers. 
 
+### Technical Breakdown
+
+This web app was created with React 16.12+ using PHP on the backend for a local API endpoint to query the database and external movie API. This project uses The Movie Database API, and caches requests on the client side whenever possible using session storage. This web app should run well on any modern browsers (IE is not supported). 
+
+### Planned Changes
+
+- Adding Apollo Server
+- Enabling PWA functionality including offline caching/loading
+- Improving lazy load
+- Improving interface
+
 
 ### Recommended Requirements
 -	NodeJS v10+ (https://nodejs.org/en/)
