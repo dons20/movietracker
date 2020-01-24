@@ -24,13 +24,32 @@ try {
     exit();
 }
 
-// set response code - 200 OK
-http_response_code(200);
+$client_data = file_get_contents("php://input");
+$_POST = json_decode($client_data, true);
 
-// Check type of search
-$URL = "https://api.themoviedb.org/3/discover/movie?api_key={$api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
-$curl_response = curlGET($URL);
-echo $curl_response;
+if (!is_numeric($_POST['page'])) {
+    // response code - 400 Bad Request
+    http_response_code(400);
+    exit("No page specified");
+}
+
+if ($_POST) {
+    // set response code - 200 OK
+    http_response_code(200);
+
+    $page = $_POST['page'];
+
+    if ($page === 0) {
+        $URL = "https://api.themoviedb.org/3/discover/movie?api_key={$api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
+        $curl_response = curlGET($URL);
+        echo $curl_response;
+    } else {
+        // Check type of search
+        $URL = "https://api.themoviedb.org/3/discover/movie?api_key={$api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={$page}";
+        $curl_response = curlGET($URL);
+        echo $curl_response;
+    }
+}
 
 function curlGET($URL)
 {

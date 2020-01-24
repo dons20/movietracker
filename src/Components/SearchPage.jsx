@@ -5,7 +5,7 @@ import styles from "./SearchPage.module.scss";
 import placeholder from "../placeholder_poster.png";
 import axios from "axios";
 
-function SearchPage({ config, data, errorDisplay }) {
+function SearchPage({ config, data, notify }) {
     const [showFilters, setShowFilters] = useState(false);
     const [searchType, setSearchType] = useState("Title");
     const [searchQuery, setSearchQuery] = useState("");
@@ -27,19 +27,7 @@ function SearchPage({ config, data, errorDisplay }) {
             })
                 .then(result => setSearchData(result.data.results))
                 .catch(e => {
-                    errorDisplay.addNotification({
-                        title: "An error has occured!",
-                        message: e.toString(),
-                        type: "danger",
-                        insert: "bottom",
-                        container: "bottom-center",
-                        animationIn: ["animated", "fadeIn"],
-                        animationOut: ["animated", "fadeOut"],
-                        dismiss: {
-                            duration: 3000,
-                            onScreen: true
-                        }
-                    });
+                    notify(e.toString());
                 });
         } else if (searchType === "Actor") {
             //TBD - Requires listing dropdown of search matches, and allowing user to choose from actors to then search

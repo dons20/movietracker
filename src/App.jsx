@@ -20,6 +20,10 @@ function App() {
     const [API_CONFIG, setConfig] = useState(JSON.parse(localStorage.getItem("api_config")));
     const [API_GENRES, setGenres] = useState(JSON.parse(localStorage.getItem("api_genres")));
 
+    /**
+     * Fetches important objects for use with the API
+     * @param {String} type - Specifies the type of request sent
+     */
     async function getOtherAPI(type) {
         return await axios({
             method: "post",
@@ -29,6 +33,31 @@ function App() {
             }
         });
     }
+
+    function createNotification(message) {
+        store.addNotification({
+            title: "An error has occured!",
+            message: message,
+            type: "danger",
+            insert: "bottom",
+            width: 300,
+            container: "bottom-center",
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+                duration: 3000,
+                onScreen: true,
+                pauseOnHover: true
+            },
+            slidingExit: {
+                timingFunction: "ease-in-out"
+            }
+        });
+    }
+
+    /**
+     * Retrieves saved movies from the applicable storage area
+     */
 
     useEffect(() => {
         axios({
@@ -41,26 +70,14 @@ function App() {
                 }
             })
             .catch(e => {
-                if (e.response) console.error(`${e.response.data.error.message}`);
-                store.addNotification({
-                    title: "An error has occured!",
-                    message:
-                        "Refresh the page to try again or try again later. Details have been logged to the console.",
-                    type: "danger",
-                    insert: "bottom",
-                    width: 300,
-                    container: "bottom-center",
-                    animationIn: ["animated", "fadeIn"],
-                    animationOut: ["animated", "fadeOut"],
-                    dismiss: {
-                        duration: 3000,
-                        onScreen: true,
-                        pauseOnHover: true
-                    },
-                    slidingExit: {
-                        timingFunction: "ease-in-out"
-                    }
-                });
+                try {
+                    console.error(`${e.response.data.error.message}`);
+                } catch (e) {
+                    console.error(e);
+                }
+                createNotification(
+                    "Refresh the page to try again or try again later. Details have been logged to the console."
+                );
             });
     }, []);
 
@@ -122,8 +139,8 @@ function App() {
             >
                 <div className="App">
                     <Header setData={setUserData} />
-                    {API_CONFIG != null && API_GENRES != null && (
-                        <Content data={userData} genres={API_GENRES} config={API_CONFIG} errorDisplay={store} />
+                    {API_CONFIG != null && API_GENRES != null && userData.length > 0 && (
+                        <Content data={userData} genres={API_GENRES} config={API_CONFIG} notify={createNotification} />
                     )}
                     <Footer />
                 </div>
