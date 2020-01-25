@@ -141,7 +141,7 @@ $transition: all 0.5s ease-in-out;
 .suggestedItem {
     cursor: pointer;
     font-size: 1.1em;
-    padding: 5px 0;
+    padding: 5px;
     transition: background-color 0.1s ease-out;
     will-change: background-color;
     &:hover {
@@ -152,7 +152,7 @@ $transition: all 0.5s ease-in-out;
 .advancedItem {
     @extend .suggestedItem;
     display: block;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 650px) {
