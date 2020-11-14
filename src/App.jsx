@@ -5,18 +5,18 @@ import ReactNotification from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import axios from "axios";
-import "./App.scss";
 import "animate.css";
+import "./App.scss";
 
 const Header = React.lazy(() => import("./Components/Header"));
 const Content = React.lazy(() => import("./Components/Content"));
 const Footer = React.lazy(() => import("./Components/Footer"));
 
 function App() {
+    const [maxFails, setMaxFails] = useState(0);
     const [userData, setUserData] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
     const [errorDisplayed, setErrorDisplayed] = useState(false);
-    const [maxFails, setMaxFails] = useState(0);
     const [API_CONFIG, setConfig] = useState(JSON.parse(localStorage.getItem("api_config")));
     const [API_GENRES, setGenres] = useState(JSON.parse(localStorage.getItem("api_genres")));
 

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useParams, Link } from "react-router-dom";
+import PulseLoader from "react-spinners/PulseLoader";
 import Ratings from "react-ratings-declarative";
 import axios from "axios";
 import styles from "./MoviePage.module.scss";
@@ -81,7 +82,13 @@ function MoviePage({ config, data, errorDisplay }) {
             <Link to="">⬅ Back</Link>
             <div className={styles.container}>
                 {movieData && Object.keys(movieData).length > 0 && (
-                    <>
+                    <Suspense
+                        fallback={
+                            <div className="pulseContainer">
+                                <PulseLoader size={20} margin={5} color="#337ab4" loading={true} />
+                            </div>
+                        }
+                    >
                         <div className={styles.image}>
                             <img src={`${path}${movieData.poster_path}`} alt={`Poster for ${movieData.title}`} />
                         </div>
@@ -115,7 +122,7 @@ function MoviePage({ config, data, errorDisplay }) {
                                 <a href={movieData.homepage}>Movie Homepage</a>
                             </div>
                         )}
-                    </>
+                    </Suspense>
                 )}
             </div>
         </>

@@ -9,7 +9,7 @@ function MovieCard({ id, image, title, rating, date }) {
     return (
         <div className="movieCard" onClick={() => history.push(`movie/${id}`)}>
             <div className="splash">
-                <img src={image} alt={`Cover art for ${title}`} />
+                <img src={image} alt={`Cover art for ${title}`} loading="lazy" width={300} />
             </div>
             <div className="movieTitle">
                 <div>{title}</div>

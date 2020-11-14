@@ -3,23 +3,24 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "animate.css": "^4.1.1",
+        "axios": "^0.21.0",
+        "http-proxy-middleware": "^1.0.6",
+        "normalize.css": "^8.0.1",
+        "react": "^17.0.1",
+        "react-app-polyfill": "^2.0.0",
+        "react-dom": "^17.0.1",
+        "react-notifications-component": "^3.0.2",
+        "react-ratings-declarative": "^3.4.1",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^4.0.0",
+        "react-spinners": "^0.9.0",
+        "sass": "^1.29.0"
+    },
+    "devDependencies": {
         "@testing-library/jest-dom": "^5.0.0",
         "@testing-library/react": "^9.4.0",
         "@testing-library/user-event": "^8.0.3",
-        "animate.css": "^3.7.2",
-        "axios": "^0.19.1",
-        "http-proxy-middleware": "^0.20.0",
-        "node-sass": "^4.13.1",
-        "normalize.css": "^8.0.1",
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0",
-        "react-notifications-component": "^2.2.4",
-        "react-ratings-declarative": "^3.4.1",
-        "react-router-dom": "^5.1.2",
-        "react-scripts": "3.3.0",
-        "react-spinners": "^0.8.0"
-    },
-    "devDependencies": {
         "ftp-deploy": "^2.3.6"
     },
     "scripts": {
@@ -36,6 +37,7 @@
     "browserslist": {
         "production": [
             ">0.2%",
+            "not ie 11",
             "not dead",
             "not op_mini all"
         ],
