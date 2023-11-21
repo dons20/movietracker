@@ -1,14 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import "./Header.scss";
 
 function Header() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     return (
         <header className="header">
-            <h2 className="headerTitle" onClick={() => history.push("")}>
+            <h2 className="headerTitle" onClick={() => navigate(".")}>
                 Movie Lovers Watchlist
             </h2>
             <SearchBar />

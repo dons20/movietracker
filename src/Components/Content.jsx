@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import "./Content.scss";
 
@@ -17,7 +17,7 @@ function Content(props) {
             }
         >
             <main role="main" className="content">
-                <Switch>
+                <Routes>
                     <Route path="/" exact>
                         <HomePage {...props} />
                     </Route>
@@ -27,7 +27,7 @@ function Content(props) {
                     <Route path="/movie/:id">
                         <MoviePage {...props} />
                     </Route>
-                </Switch>
+                </Routes>
             </main>
         </Suspense>
     );
